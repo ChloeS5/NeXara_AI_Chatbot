@@ -11,6 +11,22 @@ export default function Home() {
 
   const [message, setMessage] = useState('')
 
+  const sendMessage = async()=>{
+    setMessage("")
+    setMessage((messages)=>[
+      ...messages,
+      {role: "user", content: message},
+      {role: "assistant", content: ""},
+
+    ])
+    const response = fetch('/api/chat', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'applications/json'
+      },
+      body: JSON.stringify([...messages, {role: 'user', content: message}])
+    })
+  }
   return (
     <Box
       width = "100vw"
