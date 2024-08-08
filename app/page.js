@@ -4,10 +4,10 @@ import Image from "next/image"
 import {useState} from "react"
 
 export default function Home() {
-  const [messages, setMessages] = useState({
+  const [messages, setMessages] = useState([{
     role: 'assistant',
     content: `Hi I'm the Headstarter Support Agent, how can I assist you today?`,
-  })
+  }])
 
   const [message, setMessage] = useState('')
 
@@ -21,55 +21,47 @@ export default function Home() {
       alignItems="center"
     >
       <Stack
-      direction= "column"
-      width = "600px"
-      height = "700px"
-      border = "1px solid black"
-      p = {2}
-      spacing = {2}
+        direction= "column"
+        width = "600px"
+        height = "700px"
+        border = "1px solid black"
+        p = {2}
+        spacing = {3}
       >
         <Stack
-        direction="column"
-        spacing = {2}
-        flexGrow={1}
-        overflow= "auto"
-        maxHeight= "100%"
+          direction="column"
+          spacing = {2}
+          flexGrow={1}
+          overflow= "auto"
+          maxHeight= "100%"
         >
-          {
-
-            messages.map((message, index) =>(
-              <Box key = {index} display = 'flex' justifyContent={
-                message.role === 'assistant' ? 'flex-start' : 'flex-end'
-              }
+          {messages.map((message, index) => (
               <Box
-              bgcolor={
-                message.role === 'assistant' 
-                  ? 'primary.main'
-                  : 'secondary.main'
+                key = {index}
+                display = "flex"
+                justifyContent={
+                  message.role === 'assistant' ? 'flex-start' : 'flex-end'
+                }
+                >
+                <Box
+                  bgcolor={
+                    message.role === 'assistant' 
+                      ? 'primary.main'
+                      : 'secondary.main'
 
-              }
-              color = "white"
-              borderRadius={16}
-              p={3}
-
-            >
+                }
+                color = "white"
+                borderRadius={16}
+                p={3}
+              
+              >
                 {message.content}
 
               </Box>
             </Box>
-            )})
-          }
-
-          
-
+          ))}
         </Stack>
-
-
       </Stack>
-
-
-
-
     </Box>
   )
 
