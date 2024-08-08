@@ -27,4 +27,25 @@ export async function POST(req){
         model: 'gpt-4o-mini'
         stream: true,
     })
+
+    const stream = new ReadableStream({
+        async start(controller) {
+            const encode = new TextEncoder()
+            try{
+                for await (const chunk of completion){
+                    const content = chunk.choices[0]?.delta?.content
+                    if (content){
+                        const text = encoder.encode(content)
+                        controller.enqueue(text)
+                    }
+                }
+            } catch (err) {
+                controller.error(err)
+            } finally {
+                controller.close()
+            }
+        },
+    })
+
+    return new NextResponse(stream)
 }
