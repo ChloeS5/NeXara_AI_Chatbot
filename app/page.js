@@ -42,7 +42,7 @@ export default function Home() {
                 justifyContent={
                   message.role === 'assistant' ? 'flex-start' : 'flex-end'
                 }
-                >
+              >
                 <Box
                   bgcolor={
                     message.role === 'assistant' 
