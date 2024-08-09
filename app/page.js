@@ -7,24 +7,24 @@ export default function Home() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: "Hi I'm the Headstarter Support Agent, how can I assist you today?",
+      content: `Hi I'm the HeadStarterAI Support Agent, how can I assist you today?`,
     },
-  ])
+    ])
 
-  const [message, setMessage] = useState('')
+    const [message, setMessage] = useState('')
 
-  const sendMessage = async () => {
-    setMessage('')
-    setMessages((messages) => [
-      ...messages,
-      { role: 'user', content: message },
-      { role: 'assistant', content: '' },
+    const sendMessage = async () => {
+      setMessage('')
+      setMessages((messages)=>[
+        ...messages,
+        { role: "user", content: message },
+        { role: "assistant", content: '' },
 
     ])
     const response = fetch('/api/chat', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+      method: "POST",
+      headers:{
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify([...messages, {role: 'user', content: message }]),
     }).then( async (res) => {
@@ -32,19 +32,20 @@ export default function Home() {
       const decoder = new TextDecoder()
       
       let result = ''
-      return reader.read().then(function processText({ done, value }) {
-        if (done) {
+      return reader.read().then(function processText({ done, value }){
+        if (done){
           return result
         }
-        const text = decoder.decode(value || new Uint8Array(), {stream:true})
-        setMessages((messages) => {
+        const text = decoder.decode(value || new Int8Array(), {stream:true})
+        setMessages((messages)=>{
           let lastMessage = messages[messages.length - 1]
           let otherMessages = messages.slice(0, messages.length - 1)
+          
           return [
             ...otherMessages,
             {
               ...lastMessage,
-              content: lastMessage.content + text,
+              content: lastMessage.content + text, 
             },
           ]
         })
@@ -79,7 +80,7 @@ export default function Home() {
           {messages.map((message, index) => (
               <Box
                 key = {index}
-                display = "flex"
+                display = 'flex'
                 justifyContent={
                   message.role === 'assistant' ? 'flex-start' : 'flex-end'
                 }
@@ -90,7 +91,7 @@ export default function Home() {
                       ? 'primary.main'
                       : 'secondary.main'
 
-                  }
+                }
                 color = "white"
                 borderRadius={16}
                 p={3}
@@ -102,16 +103,14 @@ export default function Home() {
             </Box>
           ))}
         </Stack>
-        <Stack direction= {'row'} spacing={2}>
+        <Stack direction= "row" spacing={2}>
           <TextField
-            label="Message"
+            label="message"
             fullWidth
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
-          <Button variant ="contained" onClick={sendMessage}>
-            Send
-          </Button>
+          <Button variant ="contained" onClick={sendMessage}>Send</Button>
         </Stack>
       </Stack>
     </Box>

@@ -1,5 +1,5 @@
-import {NextResponse} from "next/server";
-import OpenAI from "openai";
+import {NextResponse} from 'next/server'
+import OpenAI from "openai"
 
 const systemPrompt = `You are a customer support AI for HeadStartAI, a platform that provides AI-powered interviews for software engineering jobs. Your role is to assist users with questions about our services, interview process, and technical issues they might encounter. Here are your key responsibilities:
 
@@ -22,7 +22,7 @@ export async function POST(req) {
                 role: 'system',
                 content: systemPrompt
             },
-            ...data
+            ...data,
         ],
         model: 'gpt-4o-mini',
         stream: true,
