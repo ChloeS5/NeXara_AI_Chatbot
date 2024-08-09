@@ -1,13 +1,15 @@
 'use client'
-import { Box, Stack, TextField, Button} from "@mui/material"
+import { Box, Stack, TextField, Button} from '@mui/material'
 import Image from "next/image"
-import {useState} from "react"
+import { useState } from 'react'
 
 export default function Home() {
-  const [messages, setMessages] = useState([{
-    role: 'assistant',
-    content: `Hi I'm the Headstarter Support Agent, how can I assist you today?`,
-  }])
+  const [messages, setMessages] = useState([
+    {
+      role: 'assistant',
+      content: "Hi I'm the Headstarter Support Agent, how can I assist you today?",
+    },
+  ])
 
   const [message, setMessage] = useState('')
 
@@ -15,29 +17,29 @@ export default function Home() {
     setMessage('')
     setMessages((messages) => [
       ...messages,
-      {role: 'user', content: message},
-      {role: 'assistant', content: ''},
+      { role: 'user', content: message },
+      { role: 'assistant', content: '' },
 
     ])
     const response = fetch('/api/chat', {
       method: 'POST',
       headers: {
-        'Content-Type': 'applications/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify([...messages, {role: 'user', content: message}]),
+      body: JSON.stringify([...messages, {role: 'user', content: message }]),
     }).then( async (res) => {
       const reader = res.body.getReader()
       const decoder = new TextDecoder()
       
-      let result = ""
-      return reader.read().then(function processText({done, value}){
-        if (done){
+      let result = ''
+      return reader.read().then(function processText({ done, value }) {
+        if (done) {
           return result
         }
-        const text = decoder.decode(value || new Int8Array(), {stream:true})
-        setMessages((messages)=>{
+        const text = decoder.decode(value || new Uint8Array(), {stream:true})
+        setMessages((messages) => {
           let lastMessage = messages[messages.length - 1]
-          let otherMessages = message.slice(0, messages.length - 1)
+          let otherMessages = messages.slice(0, messages.length - 1)
           return [
             ...otherMessages,
             {
@@ -88,7 +90,7 @@ export default function Home() {
                       ? 'primary.main'
                       : 'secondary.main'
 
-                }
+                  }
                 color = "white"
                 borderRadius={16}
                 p={3}
@@ -100,12 +102,12 @@ export default function Home() {
             </Box>
           ))}
         </Stack>
-        <Stack direction = "row" spacing={2}>
+        <Stack direction= {'row'} spacing={2}>
           <TextField
-          label="message"
-          fullWidth
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
+            label="Message"
+            fullWidth
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
           />
           <Button variant ="contained" onClick={sendMessage}>
             Send

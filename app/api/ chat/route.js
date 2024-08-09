@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import {NextResponse} from "next/server";
 import OpenAI from "openai";
 
 const systemPrompt = `You are a customer support AI for HeadStartAI, a platform that provides AI-powered interviews for software engineering jobs. Your role is to assist users with questions about our services, interview process, and technical issues they might encounter. Here are your key responsibilities:
@@ -12,7 +12,7 @@ const systemPrompt = `You are a customer support AI for HeadStartAI, a platform 
 
 Remember, you cannot conduct actual interviews or provide specific coding solutions. If users ask for help with coding problems, direct them to our practice resources instead. For complex technical issues or account-specific queries, advise users to contact our technical support team.`;
 
-export async function POST(req){
+export async function POST(req) {
     const openai = new OpenAI()
     const data = await req.json()
 
@@ -20,9 +20,9 @@ export async function POST(req){
         messages: [
             {
                 role: 'system',
-                content: systemPrompt,
+                content: systemPrompt
             },
-            ...data,
+            ...data
         ],
         model: 'gpt-4o-mini',
         stream: true,
@@ -30,11 +30,11 @@ export async function POST(req){
 
     const stream = new ReadableStream({
         async start(controller) {
-            const encode = new TextEncoder()
-            try{
-                for await (const chunk of completion){
+            const encoder = new TextEncoder()
+            try {
+                for await (const chunk of completion) {
                     const content = chunk.choices[0]?.delta?.content
-                    if (content){
+                    if (content) {
                         const text = encoder.encode(content)
                         controller.enqueue(text)
                     }
