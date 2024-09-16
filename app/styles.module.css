@@ -10,3 +10,10 @@
   .whiteText label {
     color: white; /* Change label color to white */
   }
+
+  @media (max-width: 768px) {
+    /* Adjust styles for smaller screens */
+    h1 {
+      font-size: 24px; /* Example adjustment */
+    }
+  }
