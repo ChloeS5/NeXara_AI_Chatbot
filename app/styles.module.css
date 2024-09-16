@@ -1,0 +1,12 @@
+
+  .chatMessage {
+    white-space: pre-wrap; /* This preserves whitespace and line breaks */
+  }
+
+  .whiteText {
+    color: white; /* Change font color to white */
+  }
+  
+  .whiteText label {
+    color: white; /* Change label color to white */
+  }

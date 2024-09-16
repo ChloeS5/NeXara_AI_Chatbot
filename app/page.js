@@ -3,11 +3,15 @@ import { Box, Stack, TextField, Button} from '@mui/material'
 import Image from "next/image"
 import { useState } from 'react'
 
+ import Head from 'next/head';
+ import Spline from "@splinetool/react-spline";
+ import styles from "./styles.module.css";
+
 export default function Home() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: `Hi I'm the HeadStarterAI Support Agent, how can I assist you today?`,
+      content: `Hi I'm the NeXara Chatbot Agent, how can I assist you today?`,
     },
     ])
 
@@ -61,14 +65,42 @@ export default function Home() {
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
+      position="relative"
+      overflow="visible"
     >
+ <h1 style={{ fontSize: '38px', color: 'white', zIndex: 1, position: 'absolute', top: '25px', left: '30px' }}>
+         NeXara <br />
+         Personal AI Chatbot
+         </h1> {/* Keep the header */}
+        <p style={{ fontSize: '20px', color: 'white', zIndex: 1, position: 'absolute', top: '130px', left: '30px' }}>Ask me anything!</p>
+
+       <main className={`${styles.main}`}>
+         <Spline scene="https://prod.spline.design/Gf5OVTklVL7MOecY/scene.splinecode" 
+           style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+           width: '100vw',
+           height: '110vh',
+           zIndex: '-1',
+         }} />
+       </main>
+
+
+
+
+
+
       <Stack
         direction= "column"
-        width = "600px"
-        height = "700px"
+        width = "800px"
+        height = "900px"
         border = "1px solid black"
         p = {2}
         spacing = {3}
+        position="relative"
+         zIndex="1"
+        backgroundColor="rgba(0,0,0,0.5)"
       >
         <Stack
           direction="column"
@@ -95,6 +127,7 @@ export default function Home() {
                 color = "white"
                 borderRadius={16}
                 p={3}
+                style={{ fontSize: '20px'}}
               
               >
                 {message.content}
@@ -109,6 +142,10 @@ export default function Home() {
             fullWidth
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            InputProps={{
+              style: { color: 'white' },
+              
+            }}
           />
           <Button variant ="contained" onClick={sendMessage}>Send</Button>
         </Stack>
