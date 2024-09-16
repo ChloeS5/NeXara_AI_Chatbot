@@ -94,7 +94,7 @@ export default function Home() {
       <Stack
         direction= "column"
         width = "800px"
-        height = "900px"
+        height = "850px"
         border = "1px solid black"
         p = {2}
         spacing = {3}
