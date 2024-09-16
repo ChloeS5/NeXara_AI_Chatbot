@@ -68,11 +68,11 @@ export default function Home() {
       position="relative"
       overflow="visible"
     >
- <h1 style={{ fontSize: '38px', color: 'white', zIndex: 1, position: 'absolute', top: '25px', left: '30px' }}>
+ <h1 style={{ fontSize: '30px', color: 'white', zIndex: 1, position: 'absolute', top: '25px', left: '23px' }}>
          NeXara <br />
          Personal AI Chatbot
          </h1> {/* Keep the header */}
-        <p style={{ fontSize: '20px', color: 'white', zIndex: 1, position: 'absolute', top: '130px', left: '30px' }}>Ask me anything!</p>
+        <p style={{ fontSize: '20px', color: 'white', zIndex: 1, position: 'absolute', top: '130px', left: '23px' }}>Ask me anything!</p>
 
        <main className={`${styles.main}`}>
          <Spline scene="https://prod.spline.design/Gf5OVTklVL7MOecY/scene.splinecode" 
@@ -144,7 +144,7 @@ export default function Home() {
             onChange={(e) => setMessage(e.target.value)}
             InputProps={{
               style: { color: 'white' },
-              
+
             }}
           />
           <Button variant ="contained" onClick={sendMessage}>Send</Button>
