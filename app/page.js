@@ -6,6 +6,7 @@ import { useState } from 'react'
  import Head from 'next/head';
  import Spline from "@splinetool/react-spline";
  import styles from "./styles.module.css";
+ import { Analytics } from "@vercel/analytics/react"
 
 export default function Home() {
   const [messages, setMessages] = useState([
